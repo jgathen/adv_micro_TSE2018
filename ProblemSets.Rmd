@@ -1,0 +1,152 @@
+---
+title: "Problems - Advanced Microeconomics"
+header-includes:
+    - \usepackage[utf8]{inputenc}
+    - \usepackage[nottoc,numbib]{tocbibind}
+    - \usepackage[section]{placeins}
+output:
+  pdf_document:
+    fig_caption: true
+    number_sections: true
+fontsize: 12pt
+geometry: margin=2cm
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\tableofcontents
+
+# Static Games of Incomplete Information
+
+## Bayesian Games (Tadelis Chp. 12)
+
+### Simple Cournot with incomplete information
+
+Consider the Cournot duopoly model in which two firms, 1 and 2, simultaneously choose the quantities they supply, $q_1$ and $q_2$. The price each will face is determined by the market demand function $p(q_1, q_2) = a - b(q_1 + q_2)$. Firm 1 has marginal cost equal to $c_1$, while firm 2 has a probability $\mu$ of having a marginal unit cost of $c_L$ and a probability $1-\mu$ of having a marginal unit cost of $c_H$. These costs and probabilities are common knowledge, but the true type of firm 2 is revealed only to firm 2. Solve for the Bayesian Nash equilibrium. 
+
+\textbf{Solution:} 
+
+Let's start with the decision of the more informed firm (firm 2). The firm will set its quantity by maximizing profits with respect to quantity supplied:
+
+$$\pi_2 = p(.)q_2 - c_iq_2, i \in \left\{L,H \right\}, \frac{\partial\pi_2}{\partial q_2} = a - bq_1 - 2bq_2^* - c_i = 0$$
+$$ q_{2,i}^* = \frac{a - bq_1 - c_i}{2b}, i \in \left\{L,H \right\}$$
+Firm 1 will set according to:
+
+$$ q_1^* = \frac{a - b\mathbb{E}(q_2) - c_1}{2b}$$
+Now, the BNE is given by the intersection of the best response correspondences. Since there is only uncertainty in the decision for firm 1, who doesn't know the true type of firm 2, we can plug in the expected value of $q_2$ for firm 1. Then:
+
+$$ q_1^*= \frac{a-c_1}{2b} - \frac{1}{2} \left( \mu\left[ \frac{a-c_L}{2b} - \frac{q_1}{2} \right] + (1-\mu)\left[ \frac{a-c_H}{2b} - \frac{q_1}{2} \right] \right)$$
+$$ q_1^* - \frac{q_1^*}{4}= \frac{a-c_1}{2b} - \frac{1}{2} \left( \mu\frac{a-c_L}{2b} + (1-\mu)\frac{a-c_H}{2b} \right) \implies q_1^* = \frac{a-2c_1+\mu c_L + (1+\mu)c_H}{3b} $$
+
+The BNE is given by ($q_1^*$,($q_{2,L}^*$,$q_{2,H}^*$)).
+
+### Cournot Revisited
+
+Consider the Cournot duopoly model from above, but now each firm has a probability $\mu$ of having a marginal unit cost of $c_L$ and a probability $1-\mu$ of having a marginal unit cost of $c_H$. These probabilities are common knowledge, but the true type is revealed only to each firm individually. Solve for the Bayesian Nash equilibrium. 
+
+\textbf{Solution:} 
+
+The FOC with marginal cost c gives:
+
+$$ q_i = \frac{a-bq_{-i}-c}{2b} $$
+Player i observes her marginal costs and then plays according to the expected quantity of Player -i. Then: 
+
+$$ q_i^* = \frac{a-c}{2b} - \frac{\mathbb{E}(q_{-i})}{2}, \mathbb{E}(q_{-i}) = \mu\left[ \frac{a-c_L}{2b} - \frac{q_i}{2} \right] + (1-\mu)\left[ \frac{a-c_H}{2b} - \frac{q_i}{2} \right]  $$
+
+$$ \implies q_i^* = \frac{a + \mu c_L + (1-\mu) c_H - 2c_i}{3b}, i \in \{L,H \}$$
+
+### Armed Conflict
+
+Consider the following strategic situation: Two rival armies plan to seize a disputed territory. Each army's general can choose either to attack (A) or to not attack (N). In addition, each army is either strong (S) or weak (W) with equal probability, and the realizations for each army are independent. Furthermore the type of each army is known only to that army's general. An army can capture the territory if either (i) it attacks and its rival does not or (ii) it and its rival attack, but it is strong and the rival is weak. If both attack and are of equal strength then neither captures the territory. As for payoffs, the territory is worth m if captured and each army has a cost of fighting equal to s if it is strong and w if it is weak, where $s < w$. If an army attacks but its rival does not, no costs are borne by either side. Identify all the pure-strategy Bayesian Nash equilibria of this game for the following two cases, and briefly describe the intuition for your results:
+
+(a) $m=3,w=2,s=1$
+(b) $m=3,w=4,s=2$
+
+\textbf{Solution:} 
+
+(a) Writing down the 4x4 normal-form matrix with strategies $\{A,N\}^2$ for the two information sets for each player, we get a symmetric game and easily see that both (N,A) & (N,N) are strictly dominated by playing (A,N). By IESDS, we get the unique BNE of ((A,N),(A,N)) with expected payoffs (1,1).
+
+(b) Writing down the symmetric 4x4 normal-form matrix, we now get two pure-strategy BNEs: ((A,N),(N,N)) & ((N,N),(A,N)) with expected payoffs (2,0) and (0,2) respectively. 
+
+
+### Not All That Glitters
+
+A prospector owns a gold mine where he can dig to recover gold. His output depends on the amount of gold in the mine, denoted by $x$. The prospector knows the value of $x$, but the rest of the world knows only that the amount of gold is uniformly distributed on the interval $[0,1]$. Before deciding to mine, the prospector can try to sell his mine to a large mining company, which is much more efficient in its extraction methods. The prospector can ask the company owner for any price $p \geq 0$, and the owner can reject (R) or accept (A) the offer. If the owner rejects the offer then the prospector is left to mine himself, and his payoff from self-mining is equal to $3x$. If the owner accepts the offer then the prospector's payoff is the price $p$, while the owner's payoff is given by the net value $4x - p$, and this is common knowledge.
+
+(a) Show that for a given price $p \geq 0$ there is a threshold type $x(p) \in [0,1]$ of prospector, such that types below $x(p)$ will prefer to sell the mine, while types above $x(p)$ will prefer to self-mine.
+(b) Find the pure-strategy Bayesian Nash equilibrium of this game, and show that it is unique. What is the expected payoff of each type of prospector and of the company owner in the equilibrium you derived?
+
+\textbf{Solution:} 
+
+
+### Reap and Weep 
+
+A farmer owns some land that he can farm to produce crops. Farming output depends on the talent of the farmer. The farmer knows his talent, but the rest of the world knows only that a farmer's talent is uniformly distributed: $\theta \in [0,1]$. The farmer's payoff from farming his land is equal to his talent $\theta$. Before setting up his farm, the farmer approaches the local manufacturing plant and offers to work on the production line. The farmer can ask the plant owner for any wage $w \geq 0$, and the owner can reject (R) or accept (A) the offer. If the owner rejects the offer then the farmer must return home and settle into his farming. If the owner accepts the offer then the farmer's payoff is the wage $w$, while the owner's payoff is given by the net value $\frac{3}{2}\theta - w$, and this is common knowledge.
+
+(a) Define the set of pure strategies for each player and find the pure-strategy Bayesian Nash equilibria of this game.
+(b) Averaging over the type of farmer, what are the possible levels of \textit{social surplus} (sum of expected payoffs of the farmer and the owner in their potential relationship) from the equilibrium you derived in (a)?
+(c) A local policy maker who is advocating for the increase of social surplus is proposing to cut water subsidies to the farmers, which would imply that a farmer of type $\theta$ would get a payoff of $\frac{1}{2}\theta$ from farming his land. This policy has no effect on the productivity of manufacturing. Using the criterion of social surplus, can you advocate for this policy maker using equilibrium analysis?
+
+\textbf{Solution:} 
+
+ 
+### Trading Places
+
+Two players, 1 and 2, each own a house. Each player i values his own house at $v_i$. The value of player i's house to the other player, i.e., to player $j \neq i$, is $\frac{3}{2}v_i$. Each player i knows the value $v_i$ of his own house to himself, but not the value of the other player's house. The values $v_i$ are drawn independently from the interval $[0,1]$ with uniform distribution.
+
+(a) Suppose players announce simultaneously whether they want to exchange their houses. If both players agree to an exchange, the exchange takes place. Otherwise no exchange takes place. Find a Bayesian Nash equilibrium of this game in pure strategies in which each player i accepts an exchange if and only if the value $v_i$ does not exceed some threshold $\theta_i$.
+(b) How would your answer to (a) change if player j's valuation of player i's house were $\frac{5}{2}v_i$?
+(c) Try to explain why any Bayesian Nash equilibrium of the game described in (a) must involve threshold strategies of the type postulated in (a).
+ 
+\textbf{Solution:} 
+
+
+### Grab the Dollar
+
+Each of two players has two possible actions: grab the dollar or don't grab the dollar. Player i's payoff is 1 if he is the only one to grab the dollar, and his payoff is 0 if he does not. Each player's payoff is -1 if both players grab the dollar.
+
+(a) Find the Nash equilibria of this game of complete information.
+(b) Consider the following perturbation of the game. The payoff structure is the same, with the following addition: When player i is the only one to grab the dollar his payoff is $1 + \theta_i$ , where $\theta_i$ is player i's type and it is uniformly distributed over $[-\epsilon, \epsilon]$ with $\epsilon < 1$. Each player knows only his own type, and the distribution of types is common knowledge. Find the pure-strategy Bayesian Nash equilibrium of this
+game of incomplete information.
+(c) Show that when $\epsilon$ converges to 0, the pure-strategy Bayesian Nash
+equilibrium converges to the mixed-strategy Nash equilibrium of the game with complete information.
+
+\textbf{Solution:} 
+
+
+
+## Auctions
+
+
+# Dynamic Games of Incomplete Information
+
+## Intro Sequential Rationality & Perfect Bayesian Equilibrium (Chp. 15)
+
+## Signaling Games (Chp. 16)
+
+### Beer or Quiche? 
+
+Cho and Kreps (1987) introduced what is now a famous two-player signaling game. First, Nature selects player 1, who knows his type, to be either a wimp (W), with probability $p = 0.1$, or surly (S), with probability $1 - p = 0.9$. Player 1 then chooses what to have for breakfast: beer (B) or quiche (Q). A surly type prefers beer while a wimp prefers quiche. Player 1's preferred breakfast gives him a payoff of 1 while his less-preferred choice gives him 0. After breakfast player 2 observes what player 1 ate but does not know whether he is a wimp or surly. Player 2 then chooses whether to duel (D) with player 1 or not to duel (N). Player 1, regardless of his type, prefers no duel, yielding him an extra payoff of 2, to a duel, which gives him 0. (For example, if player 1 eats his preferred breakfast and avoids a duel then his final payoff is 3, while if he eats his preferred breakfast and is forced into a duel then his final payoff is 1.) Player 2, however, prefers to duel if and only if player 1 is a wimp. If player 1 is surly then player 2's payoff is 0 from D and 1 from N. If player 1 is a wimp then player 2's payoff is 2 from D and 1 from N.
+
+(a) Draw the extensive form of this game.
+(b) What are the Bayesian Nash equilibria of this game?
+(c) What are the perfect Bayesian equilibria?
+(d) Of the equilibria you found in (c), which fail the intuitive criterion?
+
+
+## Cheap Talk (Chp. 18)
+
+### Stockbrokers
+
+A stockbroker can give his client one of three recommendations regarding a certain stock: buy (B), hold (H), or sell (S). The stock can be one of three kinds: a winner (W ), mediocre (M ), or a loser (L). The stock-broker knows the type of stock but the client knows only that each type is equally likely. The game proceeds as follows: first, the stockbroker makes a recommendation $a_1 \in \{B, H, S\}$ to the client, after which the client chooses an action $a_2 \in \{B, H, S\}$ and payoffs are determined. The payoffs to the stock-broker (player 1) and client (player 2) depend on the type of stock and the action taken by the client (the pairs are $(v_1, v_2)$, where $v_i$ is player i's payoff) as follows:
+
+(a) Find a babbling perfect Bayesian equilibrium of this game.
+(b) Is there a fully truthful perfect Bayesian equilibrium in which the stockbroker makes the recommendation that, if followed, maximizes the client's payoff?
+(c) What is the most informative perfect Bayesian equilibrium of this
+game?
+
+
+
+
