@@ -147,12 +147,31 @@ Cho and Kreps (1987) introduced what is now a famous two-player signaling game. 
 
 ### Stockbrokers
 
-A stockbroker can give his client one of three recommendations regarding a certain stock: buy (B), hold (H), or sell (S). The stock can be one of three kinds: a winner (W ), mediocre (M ), or a loser (L). The stock-broker knows the type of stock but the client knows only that each type is equally likely. The game proceeds as follows: first, the stockbroker makes a recommendation $a_1 \in \{B, H, S\}$ to the client, after which the client chooses an action $a_2 \in \{B, H, S\}$ and payoffs are determined. The payoffs to the stock-broker (player 1) and client (player 2) depend on the type of stock and the action taken by the client (the pairs are $(v_1, v_2)$, where $v_i$ is player i's payoff) as follows:
+A stockbroker can give his client one of three recommendations regarding a certain stock: buy (B), hold (H), or sell (S). The stock can be one of three kinds: a winner (W), mediocre (M), or a loser (L). The stock-broker knows the type of stock but the client knows only that each type is equally likely. The game proceeds as follows: first, the stockbroker makes a recommendation $a_1 \in \{B, H, S\}$ to the client, after which the client chooses an action $a_2 \in \{B, H, S\}$ and payoffs are determined. The payoffs to the stock-broker (player 1) and client (player 2) depend on the type of stock and the action taken by the client (the pairs are $(v_1, v_2)$, where $v_i$ is player i's payoff) as in Table 1. 
+
+```{r, results='asis', eval=TRUE, echo=FALSE, }
+library(knitr)
+payoffs_stockbrokers <- c("(2,2)","(0,1)","(-2,0)",
+                          "(-1,-1)","(1,0)","(-1,1)",
+                          "(-2,-2)","(0,-1)","(2,0)")
+payoff_matrix_stockbrokers <- matrix(payoffs_stockbrokers, nrow = 3)
+dimnames(payoff_matrix_stockbrokers) <- c(list(c("W","M","L")), list(c("B","H","S")))
+kable(payoff_matrix_stockbrokers, format="latex", caption = "Payoff matrix (Stockbrokers)", align = "c")
+```
 
 (a) Find a babbling perfect Bayesian equilibrium of this game.
 (b) Is there a fully truthful perfect Bayesian equilibrium in which the stockbroker makes the recommendation that, if followed, maximizes the client's payoff?
 (c) What is the most informative perfect Bayesian equilibrium of this
 game?
 
+\textbf{Solution:} 
+
+(a) From the payoffs given above, the stockbroker wants his client to buy if the stock is good, hold if it is mediocre and sell if it is a loser. The client's interests are not perfectly aligned. She already prefers to buy when she holds a mediocre stock and wants to hold a losing stock. For her, selling is strictly dominated by holding, no matter the true type of the stock. In a babbling PBE, the stockbroker's actions have no effect on the actions of the client. Thus, to find a babbling PBE, we can first look at what the client would play if there was no stockbroker. It can be easily seen that by maximizing expected payoffs from randomizing between B and H, the client will choose B with probability 1. With the client playing B for sure, the stockbroker can play any action $a_1 \in \{B, S\}$ with probability 1 or randomize between the two, but independently from the type randomization whose outcome he observes. 
+It is easily seen that this is indeed a babbling PBE since the action by the stockbroker is uninformative with respect to the true type and thus the belief updating does not lead to any other strategy $\sigma_2'$ being more profitable.
+
+(b) From (a) we have already seen that this doesn't exist, because the interests of the stockbroker and the client do not align perfectly. Thus, always following the recommendations of the stockbroker cannot maximize the client's payoff. 
+
+(c) Let's assume that the stockbroker recommends according to the following rule $(W=B, M=H, L=S)$ and that the client will play B if she gets the recommendations B or H and plays H if she gets the recommendation S. Then, expected payoffs are $\frac{4}{3}$ for the client and $\frac{1}{3}$ for the stockbroker. Obviously, the stockbroker can improve on this by instead recommending according to the rule $(W=B, M=S, L=S)$, which will give an expected payoff of $\frac{2}{3}$. This again, will lead the client to change her strategy. One realizes that as long as their interests are not aligned, no equilibrium can be found. 
+An alternative strategy set is that they agree on informative information processing in the case when their interests align (i.e. when the true type is W) and otherwise randomize or play uninformatively. Then, the client plays according to the rule "Play B for sure if the stockbroker recommends B, otherwise, play M & L with equal probability". The stockbroker in turn plays according to the rule "Play B if observe W, otherwise play H and S with equal probability independently of the true type". It is easily seen that there are many PBEs of this kind, since there are many uninformative strategies the stockbroker could take if W is not observed. They are all the same in their degree of informativeness however. 
 
 
