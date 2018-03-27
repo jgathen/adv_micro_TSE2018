@@ -135,6 +135,13 @@ Cho and Kreps (1987) introduced what is now a famous two-player signaling game. 
 (c) What are the perfect Bayesian equilibria?
 (d) Of the equilibria you found in (c), which fail the intuitive criterion?
 
+\textbf{Solution:} 
+
+(a) Draw it yourself ;)
+(b) There are two pure-strategy BNEs: ((B,B),(N,D)) and ((Q,Q),(D,N))
+(c) Both of which survive as PBEs. The logic is straightforward. Since in both equilibria, only one information set is reached for player 2 on-path, the player does not learn anything from the play and thus cannot update her probabilities. Given the probabilities p and 1-p, payoffs remain the same as in the normal-form representation of the game. Given these beliefs, it is sequentially rational to play according to the respective BNE strategy. 
+(d) It is non-credible that given Player 1 drinks Beer instead of eating Quiche, Player 2 would play Duel. Thus, 
+((Q,Q),(D,N)) does not survive the intuitive criterion; only ((B,B),(N,D)) does. (Maybe someone got a more rigorous answer here??)
 
 ## Cheap Talk (Chp. 18)
 
@@ -146,7 +153,6 @@ A stockbroker can give his client one of three recommendations regarding a certa
 (b) Is there a fully truthful perfect Bayesian equilibrium in which the stockbroker makes the recommendation that, if followed, maximizes the client's payoff?
 (c) What is the most informative perfect Bayesian equilibrium of this
 game?
-
 
 
 
